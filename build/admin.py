@@ -21,6 +21,9 @@ def open_adminka_form():
     window.destroy()
     subprocess.Popen(["Python","Adminka.py"])
 
+def open_back_form():
+    window.destroy()
+    subprocess.Popen(["Python","First.py"])
 def check_credentials():
     username = entry_1.get()
     password = entry_2.get()
@@ -127,7 +130,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=open_back_form,
     relief="flat"
 )
 button_1.place(
