@@ -4,7 +4,7 @@
 
 
 from pathlib import Path
-
+import subprocess
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
@@ -23,6 +23,16 @@ window = Tk()
 window.geometry("372x282")
 window.configure(bg = "#FFFFFF")
 
+def open_stst_form():
+    window.destroy()
+    subprocess.Popen(["Python","OfikStat.py"])
+def open_zakaz_form():
+    window.destroy()
+    subprocess.Popen(["Python","OfikZakaz.py"])
+
+def open_back_form():
+    window.destroy()
+    subprocess.Popen(["Python","First.py"])
 
 canvas = Canvas(
     window,
@@ -49,7 +59,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=open_zakaz_form,
     relief="flat"
 )
 button_1.place(
@@ -65,7 +75,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
+    command=open_stst_form,
     relief="flat"
 )
 button_2.place(
@@ -81,7 +91,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=open_back_form,
     relief="flat"
 )
 button_3.place(

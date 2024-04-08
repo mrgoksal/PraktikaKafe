@@ -4,7 +4,7 @@
 
 
 from pathlib import Path
-
+import subprocess
 # from tkinter import *
 # Explicit imports to satisfy Flake8
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
@@ -17,6 +17,13 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Роман\Desktop\PraktikaKafe\buil
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def open_back_form():
+    window.destroy()
+    subprocess.Popen(["Python","Ofik1.py"])
+
+def open_first_form():
+    window.destroy()
+    subprocess.Popen(["Python","First.py"])
 
 window = Tk()
 
@@ -49,7 +56,7 @@ button_1 = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
+    command=open_back_form,
     relief="flat"
 )
 button_1.place(
@@ -81,7 +88,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=open_first_form,
     relief="flat"
 )
 button_3.place(
