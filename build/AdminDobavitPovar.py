@@ -4,6 +4,7 @@
 
 
 from pathlib import Path
+import sqlite3
 import subprocess
 # from tkinter import *
 # Explicit imports to satisfy Flake8
@@ -17,6 +18,12 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Роман\Desktop\PraktikaKafe\buil
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def add_user_to_db(username: str, password: str):
+    conn = sqlite3.connect('cafe.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO cooks (username, password) VALUES (?, ?)', (username, password))
+    conn.commit()
+    conn.close()
 
 def open_first_form():
     window.destroy()
@@ -26,6 +33,12 @@ def open_first_form():
 def open_back_form():
     window.destroy()
     subprocess.Popen(["Python", "AdminDobavit.py"])
+
+def handle_login():
+    username = entry_1.get()
+    password = entry_2.get()
+    add_user_to_db(username, password)
+    open_first_form()
 
 window = Tk()
 
@@ -90,7 +103,7 @@ button_3 = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
+    command=handle_login,
     relief="flat"
 )
 button_3.place(

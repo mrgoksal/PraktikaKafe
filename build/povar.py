@@ -7,8 +7,8 @@ from pathlib import Path
 import subprocess
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
+import sqlite3
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\Роман\Desktop\PraktikaKafe\build\login\frame0")
@@ -27,10 +27,19 @@ def check_credentials():
     username = entry_1.get()
     password = entry_2.get()
 
-    if username.lower() == "povar" and password.lower() == "povar":
+    conn = sqlite3.connect('cafe.db')
+    cursor = conn.cursor()
+
+    # Проверяем наличие повара в базе данных с введенным логином и паролем
+    cursor.execute('SELECT * FROM cooks WHERE username=? AND password=?', (username, password))
+    cook = cursor.fetchone()
+    conn.close()
+
+    if cook is not None:
         open_povar_form()
     else:
-        print('Не верно')
+        # Если данные неверны, выводим сообщение об ошибке через экранную форму
+        messagebox.showerror("Ошибка", "Неверные логин или пароль")
 
 window = Tk()
 
