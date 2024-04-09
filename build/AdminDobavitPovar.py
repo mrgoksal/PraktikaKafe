@@ -38,7 +38,7 @@ def handle_login():
     username = entry_1.get()
     password = entry_2.get()
     add_user_to_db(username, password)
-    open_first_form()
+    open_back_form()
 
 window = Tk()
 
